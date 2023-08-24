@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Timer</string>
+    <string name="content_desc_ic_up">Icon Up</string>
+    <string name="content_desc_ic_down">Icon Down</string>
+</resources>
