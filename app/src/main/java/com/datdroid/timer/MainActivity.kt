@@ -12,6 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.datdroid.timer.ui.theme.TimerTheme
 import com.datdroid.timer.ui.widget.HorizontalNumberScroller
+import com.datdroid.timer.viewmodel.TimerViewModel
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,17 +24,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    HorizontalNumberScroller()
+                    val timerViewModel = getViewModel<TimerViewModel>()
+                    HorizontalNumberScroller(timerViewModel)
                 }
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    TimerTheme {
-        HorizontalNumberScroller()
     }
 }

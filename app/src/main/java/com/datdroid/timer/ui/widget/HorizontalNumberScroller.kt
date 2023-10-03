@@ -9,6 +9,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -17,9 +18,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.datdroid.timer.R
+import com.datdroid.timer.viewmodel.TimerViewModel
 
 @Composable
-fun HorizontalNumberScroller() {
+fun HorizontalNumberScroller(
+    timerViewModel: TimerViewModel
+) {
+    val seconds by timerViewModel.mSecondsFirstDigit
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -30,12 +35,12 @@ fun HorizontalNumberScroller() {
             painter = painterResource(id = R.drawable.ic_arrow_up),
             contentDescription = stringResource(id = R.string.content_desc_ic_up),
             modifier = Modifier
-                .clickable { /* TODO: handle click */ }
+                .clickable { timerViewModel.incSeconds() }
                 .size(dimensionResource(id = R.dimen.ic_size))
         )
 
         Text(
-            text = "9",
+            text = seconds.toString(),
             style = MaterialTheme.typography.h1.copy(
                 fontWeight = FontWeight.Bold,
                 fontSize = 96.sp
@@ -45,7 +50,7 @@ fun HorizontalNumberScroller() {
             painter = painterResource(id = R.drawable.ic_arrow_down),
             contentDescription = stringResource(id = R.string.content_desc_ic_down),
             modifier = Modifier
-                .clickable { /* TODO: handle click */ }
+                .clickable { timerViewModel.decSeconds() }
                 .size(dimensionResource(id = R.dimen.ic_size))
         )
     }
